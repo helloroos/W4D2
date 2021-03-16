@@ -8,12 +8,12 @@ class Manager < Employee
         @employees = []
     end
 
-    def bonus(multiplier)
-        return 0 if self.employees.empty?
+    def bonus(multiplier) #ned  darren shawna
+        return 0 if self.employees.empty? #[darren] [shawna, david] 
 
         money = 0
-        @employees.each do |employee|
-            money += employee.bonus(multiplier)
+        @employees.each do |employee| #darren shawna
+            money += employee.bonus(multiplier) #darren.bonus 0
         end
         return money
     end
