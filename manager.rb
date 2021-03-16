@@ -1,23 +1,40 @@
 require_relative "employee"
 class Manager < Employee
 
-    attr_reader :employees
+    attr_reader :employees, :salary
 
     def initialize(name, title, salary, boss = nil)
         super
         @employees = []
     end
 
-    def bonus(multiplier) #ned  darren shawna
-        return 0 if self.employees.empty? #[darren] [shawna, david] 
+    # def bonus(multiplier) #ned  darren shawna
+    #     return employee.salary if self.employees.empty? #[darren] [shawna, david] 
 
+    #     money = 0
+    #     @employees.each do |employee| #darren shawna
+    #         money += employee.bonus(multiplier) #darren.bonus 0
+    #         money += (employee.salary * multiplier)
+    #     end
+    #     return money
+    # end
+
+    def bonus(multiplier) #ned  darren shawna
+        # return employee.salary if self.employees.empty? #[darren] [shawna, david] 
         money = 0
         @employees.each do |employee| #darren shawna
-            money += employee.bonus(multiplier) #darren.bonus 0
+            if employee.employees.nil?
+                money += employee.salary
+            else
+                money += employee.bonus(multiplier)
+            end
         end
-        return money
+        money * multiplier
     end
 end
+
+# Ned >> Darren >> Shawna, David >> 
+
 
 
 ned = Manager.new("Ned", "Founder", 1000000)
@@ -29,6 +46,6 @@ ned.employees << darren
 darren.employees << shawna 
 darren.employees << david
 
-p ned.bonus(5) # => 500_000
-p darren.bonus(4) # => 88_000
+p ned.bonus(5) # => 500_000 >> 110_000 (David, Shawna)
+p darren.bonus(5) # => 88_000 >> 390_000 (Darren)
 p david.bonus(3) # => 30_000
