@@ -1,3 +1,4 @@
+require "byebug"
 require_relative "employee"
 class Manager < Employee
 
@@ -22,13 +23,16 @@ class Manager < Employee
     def bonus(multiplier) #ned  darren shawna
         # return employee.salary if self.employees.empty? #[darren] [shawna, david] 
         money = 0
+        # debugger
         @employees.each do |employee| #darren shawna
             if employee.employees.nil?
                 money += employee.salary
             else
                 money += employee.bonus(multiplier)
+                # money += employee.salary
             end
         end
+        money += @employees.first.salary * multiplier
         money * multiplier
     end
 end
@@ -47,5 +51,5 @@ darren.employees << shawna
 darren.employees << david
 
 p ned.bonus(5) # => 500_000 >> 110_000 (David, Shawna)
-p darren.bonus(5) # => 88_000 >> 390_000 (Darren)
+p darren.bonus(4) # => 88_000 >> 390_000 (Darren)
 p david.bonus(3) # => 30_000
