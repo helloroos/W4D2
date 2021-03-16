@@ -9,37 +9,21 @@ class Manager < Employee
         @employees = []
     end
 
-    # def bonus(multiplier) #ned  darren shawna
-    #     return employee.salary if self.employees.empty? #[darren] [shawna, david] 
-
-    #     money = 0
-    #     @employees.each do |employee| #darren shawna
-    #         money += employee.bonus(multiplier) #darren.bonus 0
-    #         money += (employee.salary * multiplier)
-    #     end
-    #     return money
-    # end
-
-    def bonus(multiplier) #ned  darren shawna
-        # return employee.salary if self.employees.empty? #[darren] [shawna, david] 
+    def bonus(multiplier) # Ned
         money = 0
-        # debugger
-        @employees.each do |employee| #darren shawna
+        @employees.each do |employee| # Darren
             if employee.employees.nil?
-                money += employee.salary
+                money += employee.salary * multiplier
             else
-                money += employee.bonus(multiplier)
-                # money += employee.salary
+                money += employee.bonus(multiplier) # Darren
+                money += employee.salary * multiplier
             end
         end
-        money += @employees.first.salary * multiplier
-        money * multiplier
+        money 
     end
 end
 
 # Ned >> Darren >> Shawna, David >> 
-
-
 
 ned = Manager.new("Ned", "Founder", 1000000)
 darren = Manager.new("Darren", "TA Manager", 78000, ned)
@@ -50,6 +34,6 @@ ned.employees << darren
 darren.employees << shawna 
 darren.employees << david
 
-p ned.bonus(5) # => 500_000 >> 110_000 (David, Shawna)
-p darren.bonus(4) # => 88_000 >> 390_000 (Darren)
+p ned.bonus(5) # => 500_000 >> 390_000 (Darren)
+p darren.bonus(4) # => 88_000 >> 110_000 (David, Shawna)
 p david.bonus(3) # => 30_000
