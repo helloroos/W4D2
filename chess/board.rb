@@ -7,21 +7,19 @@ class Board
 
     def initialize
         @grid = Array.new(8) { Array.new(8) }
+        @nullpiece = NullPiece.instance
         @grid.each_with_index do |row, idx|
             if idx == 0 || idx == 1
                 row.map! do |pos|
-                    p ||= Piece.new 
-                    p
+                    Piece.new(color, pos, self)
                 end
             elsif idx == 6 || idx == 7
                 row.map! do |pos|
-                    p ||= Piece.new 
-                    p
+                    Piece.new(color, pos, self)
                 end
             else
                 row.map! do |pos|
-                    n ||= NullPiece.new 
-                    n
+                    @nullpiece
                 end
             end
         end
@@ -40,16 +38,16 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        raise "Error" unless self[start_pos].is_a?(Piece)
+        raise "Error" unless self[start_pos].class == Piece
         # raise "Error" unless valid_move?(end_pos)
 
         current_piece = self[start_pos]
         other_piece = self[end_pos]
         # debugger
         if other_piece.is_a?(NullPiece)
-            self[start_pos], self[end_pos] = other_piece, current_piece
+            self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
         else
-            self[start_pos] = NullPiece.new
+            self[start_pos] = @nullpiece
             self[end_pos] = current_piece
         end 
     end
