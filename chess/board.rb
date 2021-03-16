@@ -1,5 +1,6 @@
 require_relative "piece"
 require_relative "nullpiece"
+require "byebug"
 
 class Board
     attr_accessor :grid
@@ -26,10 +27,10 @@ class Board
         end
     end
 
-    def [](pos)
-        row = pos[0]
-        col = pos[1]
-        @grid[row][col]
+    def [](pos) # instance meth, pos == [0, 0]
+        row = pos[0] 
+        col = pos[1] 
+        @grid[row][col] 
     end
 
     def []=(pos, val)
@@ -38,15 +39,14 @@ class Board
         @grid[row][col] = val
     end
 
-    def []==(pos, val)
-        row = pos[0]
-        col = pos[1]
-        @grid[row][col] == val
-    end
-
+    # def []==(pos, val)
+    #     row = pos[0]
+    #     col = pos[1]
+    #     @grid[row][col] == val
+    # end
 
     def move_piece(start_pos, end_pos)
-        raise "Error" unless @grid[start_pos] == :P
+        raise "Error" unless self[start_pos] == :P
         
     end
 
