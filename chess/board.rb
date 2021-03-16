@@ -39,19 +39,19 @@ class Board
         @grid[row][col] = val
     end
 
-    # def []==(pos, val)
-    #     row = pos[0]
-    #     col = pos[1]
-    #     @grid[row][col] == val
-    # end
-
     def move_piece(start_pos, end_pos)
-        raise "Error" unless self[start_pos] == :P
+        raise "Error" unless self[start_pos].is_a?(Piece)
         # raise "Error" unless valid_move?(end_pos)
+
         current_piece = self[start_pos]
         other_piece = self[end_pos]
-        if other_piece == NullPiece
-            self[start_pos] = 
+        # debugger
+        if other_piece.is_a?(NullPiece)
+            self[start_pos], self[end_pos] = other_piece, current_piece
+        else
+            self[start_pos] = NullPiece.new
+            self[end_pos] = current_piece
+        end 
     end
 
 end
