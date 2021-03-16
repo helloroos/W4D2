@@ -27,7 +27,7 @@ class Board
         end
     end
 
-    def [](pos) # instance meth, pos == [0, 0]
+    def [](pos) 
         row = pos[0] 
         col = pos[1] 
         @grid[row][col] 
@@ -47,7 +47,11 @@ class Board
 
     def move_piece(start_pos, end_pos)
         raise "Error" unless self[start_pos] == :P
-        
+        # raise "Error" unless valid_move?(end_pos)
+        current_piece = self[start_pos]
+        other_piece = self[end_pos]
+        if other_piece == NullPiece
+            self[start_pos] = 
     end
 
 end
