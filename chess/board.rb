@@ -1,14 +1,17 @@
 require_relative "piece"
 require_relative "nullpiece"
+
 class Board
 
     def initialize
         @grid = Array.new(8) { Array.new(8) }
-        @grid.each_with_index do |row, idx1|
-            if idx1 == 0 || idx1 == 1 || idx1 = 6 || idx1 == 7
-                row.map! { |pos| Piece.new }
+        @grid.each_with_index do |row, idx|
+            if idx == 0 || idx == 1
+                row.map! { |pos| :P = Piece.new }
+            elsif idx == 6 || idx == 7
+                row.map! { |pos| :P = Piece.new }
             else
-                row.map! { |pos| NullPiece.new }
+                row.map! { |pos| :N = NullPiece.new }
             end
         end
     end
@@ -26,9 +29,8 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
+        if @grid[start_pos] == :N
     end
-
-
 
 end
 
