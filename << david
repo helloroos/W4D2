@@ -1,0 +1,11 @@
+=> [[32m#<Employee:0x00005629fe518af0[0m
+  @boss[32m=[0m
+   [32m#<Manager:0x00005629fe7a5c50[0m
+    @boss[32m=[0m[32m#<Manager:0x00005629fe815730[0m @boss[32m=[0m[1;36mnil[0m, @employees[32m=[0m[[32m#<Manager:0x00005629fe7a5c50[0m ...[32m>[0m], @name[32m=[0m[31m[1;31m"[0m[31mNed[1;31m"[0m[31m[0m, @salary[32m=[0m[1;34m1000000[0m, @title[32m=[0m[31m[1;31m"[0m[31mFounder[1;31m"[0m[31m[0m[32m>[0m,
+    @employees[32m=[0m[...],
+    @name[32m=[0m[31m[1;31m"[0m[31mDarren[1;31m"[0m[31m[0m,
+    @salary[32m=[0m[1;34m78000[0m,
+    @title[32m=[0m[31m[1;31m"[0m[31mTA Manager[1;31m"[0m[31m[0m[32m>[0m,
+  @name[32m=[0m[31m[1;31m"[0m[31mShawna[1;31m"[0m[31m[0m,
+  @salary[32m=[0m[1;34m12000[0m,
+  @title[32m=[0m[31m[1;31m"[0m[31mTA[1;31m"[0m[31m[0m[32m>[0m]
