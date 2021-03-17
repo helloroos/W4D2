@@ -18,7 +18,25 @@ class Pawn < Piece
         #elsif if pos[+1] || pos[-1] == empty?(nullpiece)
             #shovel in forward_direction
 
-
+        if at_start_row?
+            row = @pos[0] + forward_steps
+            col = @pos[1] 
+            if @board[[row, col]].empty?
+                final_moves << [row, col] 
+            end
+        end
+        if side_attacks != nil
+            side_attacks.each do |ele|
+                row = @pos[0] + ele[0]
+                col = @pos[1] + ele[1]
+                final_moves << [row, col]
+            end
+        end
+        row = @pos[0] + forward_dir
+        col = @pos[1]
+        if @board[[row, col]].empty?
+            final_moves << [row, col]
+        end
         final_moves
     end
 
@@ -54,6 +72,14 @@ class Pawn < Piece
         elsif color == :black && @board[[col+1,row-1]].color == :white #[5,3]
             return [[1, -1]]
         end
+        if color == :white && (@board[[col-1,row-1]].color == :black &&  @board[[col-1,row+1]].color == :black)
+            return [[-1,-1],[-1,1]]
+        elsif color == :white && @board[[col-1,row-1]].color == :black #[5,6]
+            return [[-1, -1]]
+        elsif color == :white && @board[[col-1,row+1]].color == :black #[5,3]
+            return [[-1, +1]]
+        end
+        nil
     end
 
 end
