@@ -1,5 +1,6 @@
+require "colorize"
 class Piece
-
+    
     attr_reader :value, :pos, :board, color
     def initialize(color, pos, board)
         @value = :P
@@ -25,7 +26,6 @@ class Piece
     # end
 
     def symbol
-        # Check if the children have their symbold meth
         raise NotImplementedError 
     end
 
