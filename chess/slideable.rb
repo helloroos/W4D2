@@ -33,6 +33,22 @@ module Slideable
     end
 
     def grow_unblocked_moves_in_dir(dx, dy) # Adds every in the dir until end
+        #save self.pos into new_position var
+        #until new_position !empty?
+            #increment new_position by dx, dy
+                #shovel new_position into final_moves arr
+            #if occupied
+                #occupying piece is opposite color
+                    #shovel pos into final_arr
+                    #stop lopp
+                #occupying piece is same color
+                    #don't shovel
+                    #stop loop
+        final_moves = []
+        
+        self.pos
+
+        final_moves
     end
 
 end
