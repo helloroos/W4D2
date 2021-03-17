@@ -26,6 +26,8 @@ module Stepable
 
     def move_diffs
         raise NotImplementedError
+        # constant for ki/kn
+        # return the constants >> The dir they can move
     end
 
 end

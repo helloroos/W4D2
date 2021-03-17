@@ -9,4 +9,8 @@ class King < Piece
         #will give back array of move diffs
     end
 
+    def symbol
+        # return the symbol + colorize
+    end
+
 end
