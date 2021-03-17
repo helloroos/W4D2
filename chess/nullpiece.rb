@@ -2,12 +2,18 @@ require_relative "piece"
 require "singleton"
 
 class NullPiece < Piece
-
     include Singleton
-    attr_reader :value
+
     def initialize
-        @value = :N
-        super
+        super(nil, nil, board)
+    end
+
+    def symbol
+        raise NotImplementedError
+    end
+
+    def moves
+        raise NotImplementedError
     end
 
     def inspect
