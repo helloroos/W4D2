@@ -1,4 +1,3 @@
-
 module Slideable
 
     HORIZONTAL_DIRS = [
@@ -32,21 +31,25 @@ module Slideable
         possible_moves
     end
 
-    def grow_unblocked_moves_in_dir(dx, dy) # Adds every in the dir until end
-        #save self.pos into new_position var
-        #until new_position !empty?
-            #increment new_position by dx, dy
-                #shovel new_position into final_moves arr
-            #if occupied
-                #occupying piece is opposite color
-                    #shovel pos into final_arr
-                    #stop lopp
-                #occupying piece is same color
-                    #don't shovel
-                    #stop loop
+    def grow_unblocked_moves_in_dir(dx, dy)
         final_moves = []
-        
-        self.pos
+
+        new_position = self.pos
+
+        7.times do
+            new_position[0] += dx 
+            new_position[1] += dy
+            if empty?(new_position)
+                final_moves << new_position
+            elsif new_position[0] > 7 || new_position[1] > 7
+                break
+            elsif @board[new_position].color != self.color
+                final_moves << new_position
+                break
+            else
+                break # own, outside the board? 
+            end
+        end
 
         final_moves
     end
