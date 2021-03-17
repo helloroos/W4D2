@@ -1,17 +1,16 @@
 require "colorize"
 class Piece
     
-    attr_reader :value, :pos, :board, :color
+    attr_reader :pos, :board, :color
     def initialize(color, pos, board)
-        @value = :P
         @color = color
         @pos = pos
         @board = board
     end
 
-    def to_s
-        @value.to_s
-    end
+    # def to_s
+    #     @value.to_s
+    # end
 
     def empty?(pos)
         self.board[pos].is_a?(NullPiece)
@@ -30,7 +29,7 @@ class Piece
     end
 
     def inspect
-        :P
+        symbol
     end
 
     private
