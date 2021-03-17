@@ -1,3 +1,5 @@
+require "byebug"
+
 module Slideable
 
     HORIZONTAL_DIRS = [
@@ -25,6 +27,7 @@ module Slideable
     def moves
         possible_moves = []
         move_dirs.each do |move|
+            # debugger
             dx, dy = move
             possible_moves += grow_unblocked_moves_in_dir(dx, dy)
         end
@@ -33,18 +36,19 @@ module Slideable
 
     def grow_unblocked_moves_in_dir(dx, dy)
         final_moves = []
-
-        new_position = self.pos
+        new_position = self.pos.dup
 
         7.times do
             new_position[0] += dx 
             new_position[1] += dy
             if empty?(new_position)
-                final_moves << new_position
+                final_moves << new_position.dup
             elsif new_position[0] > 7 || new_position[1] > 7
                 break
+            elsif new_position[0] < 0 || new_position[1] < 0
+                break
             elsif @board[new_position].color != self.color
-                final_moves << new_position
+                final_moves << new_position.dup
                 break
             else
                 break # own, outside the board? 

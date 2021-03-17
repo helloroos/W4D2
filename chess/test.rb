@@ -1,3 +1,13 @@
-require "colorize"
-string = '♝'
-puts string.colorize(:blue)
+require "board"
+require "king"
+require ""
+require ""
+require ""
+require ""
+require ""
+require ""
+require ""
+require ""
+require ""
+require ""
+require ""
