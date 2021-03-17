@@ -8,21 +8,7 @@ class Board
     def initialize
         @grid = Array.new(8) { Array.new(8) }
         @nullpiece = NullPiece.instance
-        @grid.each_with_index do |row, idx|
-            if idx == 0 || idx == 1
-                row.map! do |pos|
-                    Piece.new(color, pos, self)
-                end
-            elsif idx == 6 || idx == 7
-                row.map! do |pos|
-                    Piece.new(color, pos, self)
-                end
-            else
-                row.map! do |pos|
-                    @nullpiece
-                end
-            end
-        end
+        fill_board
     end
 
     def [](pos) 
@@ -50,6 +36,32 @@ class Board
             self[start_pos] = @nullpiece
             self[end_pos] = current_piece
         end 
+    end
+
+    private
+    def fill_board
+        @grid.each_with_index do |row, idx1|
+            if idx1 == 0
+                row.each_with_index do |ele,idx2|
+                    if idx2 == 0 || idx2 == 7
+                        ele = Rook.new(:black, [idx1,idx2], self)
+                    elsif idx2 == 1 || idx2 == 6
+                        ele = Bishop.new(:black, [idx1,idx2], self)
+                end
+            elsif idx1 == 1
+                row.map! do |pos|
+                    Pawn.new(:black, pos, self)
+                end
+            elsif idx1 == 6
+                row.map! do |pos|
+                    Pawn.new(:white, pos, self)
+                end
+            else
+                row.map! do |pos|
+                    @nullpiece
+                end
+            end
+        end
     end
 
 end

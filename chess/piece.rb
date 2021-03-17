@@ -40,4 +40,3 @@ class Piece
 
 end
 
-piece.empty?([0,0])

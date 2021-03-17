@@ -10,18 +10,10 @@ class Pawn < Piece
     def moves
         final_moves = []
 
-        #logic
-        #if row[i] == 1 or 6
-            #shovel in forward_steps + forward_direction
-        #elseif if piece at self.pos + [1,1] or [1,-1]
-
-        #elsif if pos[+1] || pos[-1] == empty?(nullpiece)
-            #shovel in forward_direction
-
         if at_start_row?
             row = @pos[0] + forward_steps
             col = @pos[1] 
-            if @board[[row, col]].empty?
+            if empty?([row, col])
                 final_moves << [row, col] 
             end
         end
@@ -34,9 +26,10 @@ class Pawn < Piece
         end
         row = @pos[0] + forward_dir
         col = @pos[1]
-        if @board[[row, col]].empty?
+        if empty?([row, col])
             final_moves << [row, col]
         end
+
         final_moves
     end
 
