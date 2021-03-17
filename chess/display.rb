@@ -1,8 +1,8 @@
-require "game"
-require "cursor"
+require_relative "game"
+require_relative "cursor"
 require "colorize"
 
-class Display < Game
+class Display # < Game
 
     def initialize(board)
         @board = board
@@ -12,6 +12,13 @@ class Display < Game
     def render
         @cursor.cursor_pos.colorize(:green)
     end
-
+    
+    def test
+        testing = true
+        while testing 
+            render
+            @cursor.get_input
+        end
+    end
 
 end

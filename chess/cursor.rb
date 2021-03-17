@@ -76,16 +76,19 @@ class Cursor
   end
 
   def handle_key(key)
-    case
-    when key
-
-    when
-
-    when
-
+    case 
+    when KEYMAP[key] == :return || KEYMAP[key] == :space
+      return @cursor_pos
+    when [:left, :right, :up, :down].include?(KEYMAP[key])
+      update_pos(MOVES[key])
+      return nil
+    when KEYMAP[key] == :ctrl_c
+      Process.exit(0)
     end
   end
 
   def update_pos(diff)
+    @cursor_pos.first += diff.first
+    @cursor_pos.last += diff.last
   end
 end
