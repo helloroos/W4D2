@@ -7,6 +7,7 @@ require_relative "rook"
 require_relative "pawn"
 require_relative "nullpiece"
 require "byebug"
+require "enumerator"
 
 class Board
     attr_accessor :grid
@@ -30,8 +31,8 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        raise "Error" unless self[start_pos].class == Piece
-        # raise "Error" unless valid_move?(end_pos)
+        
+        raise "Error" if self[start_pos].is_a?(NullPiece) || (!start_pos.first.between?(0,7) || !start_pos.last.between?(0,7))
 
         current_piece = self[start_pos]
         other_piece = self[end_pos]
@@ -47,45 +48,41 @@ class Board
     private
 
     def fill_board
-        @grid.each_with_index do |row, idx1|
-            if idx1 == 0
-                row.map.each_with_index do |ele,idx2|
-                    if idx2 == 0 || idx2 == 7
-                        ele = Rook.new(:black, [idx1,idx2], self)
-                    elsif idx2 == 1 || idx2 == 6
-                        ele = Knight.new(:black, [idx1,idx2], self)
-                    elsif idx2 == 2 || idx2 == 5
-                        ele = Bishop.new(:black, [idx1, idx2], self)
-                    elsif idx2 == 3
-                        ele = Queen.new(:black, [idx1, idx2], self)
-                    else
-                        ele == King.new(:black, [idx1, idx2], self)
-                    end
+        @grid.each_with_index do |row, idx|
+            if idx == 0
+                i = 0
+                while i < row.length
+                    row[i] = Rook.new(:blue, [idx,i], self) if i == 0 || i == 7 
+                    row[i] = Knight.new(:blue, [idx,i], self) if i == 1 || i == 6 
+                    row[i] = Bishop.new(:blue, [idx,i], self) if i == 2 || i == 5 
+                    row[i] = Queen.new(:blue, [idx,i], self) if i == 3 
+                    row[i] = King.new(:blue, [idx,i], self) if i == 4
+                    i += 1
                 end
-            elsif idx1 == 1
-                row.map do |pos|
-                    Pawn.new(:black, pos, self)
+            elsif idx == 1
+                i = 0
+                while i < row.length
+                    row[i] = Pawn.new(:blue, [idx, i], self)
+                    i += 1
                 end
-            elsif idx1 == 6
-                row.map do |pos|
-                    Pawn.new(:white, pos, self)
+            elsif idx == 6
+                i = 0
+                while i < row.length
+                    row[i] = Pawn.new(:white, [idx, i], self)
+                    i += 1
                 end
-            elsif idx1 == 7
-                row.map.each_with_index do |ele,idx2|
-                    if idx2 == 0 || idx2 == 7
-                        ele = Rook.new(:white, [idx1,idx2], self)
-                    elsif idx2 == 1 || idx2 == 6
-                        ele = Knight.new(:white, [idx1,idx2], self)
-                    elsif idx2 == 2 || idx2 == 5
-                        ele = Bishop.new(:white, [idx1, idx2], self)
-                    elsif idx2 == 3
-                        ele = Queen.new(:white, [idx1, idx2], self)
-                    else
-                        ele == King.new(:white, [idx1, idx2], self)
-                    end
+            elsif idx == 7
+                i = 0
+                while i < row.length
+                    row[i] = Rook.new(:white, [idx,i], self) if i == 0 || i == 7 
+                    row[i] = Knight.new(:white, [idx,i], self) if i == 1 || i == 6 
+                    row[i] = Bishop.new(:white, [idx,i], self) if i == 2 || i == 5 
+                    row[i] = Queen.new(:white, [idx,i], self) if i == 3 
+                    row[i] = King.new(:white, [idx,i], self) if i == 4
+                    i += 1
                 end
             else
-                row.map do |pos|
+                row.map! do |pos|
                     @nullpiece
                 end
             end

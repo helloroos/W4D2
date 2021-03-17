@@ -9,6 +9,8 @@ module Stepable
             new_position = [row, col]
             if empty?(new_position)
                 final_moves << new_position
+            elsif new_position[0] < 0 || new_position[1] < 0
+                next
             elsif new_position[0] > 7 || new_position[1] > 7
                 next
             elsif @board[new_position].color != self.color
